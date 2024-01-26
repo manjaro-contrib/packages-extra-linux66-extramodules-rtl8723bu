@@ -46,11 +46,6 @@ build() {
 
 package() {
     install -D -m 644 "blacklist-rtl8xxxu.conf" "${pkgdir}/etc/modprobe.d/${_linuxprefix}-blacklist-rtl8xxxu.conf"
-
     install -D -m 644 "$_pkgname-$_commit/$_libname.ko" "$pkgdir/usr/lib/modules/${_kernver}/extramodules/$_libname.ko"
-
-    # set the kernel we've built for inside the install script
-    sed -i -e "s/EXTRAMODULES=.*/EXTRAMODULES=${_kernver}/extramodules/g" "${startdir}/${install}"
-
     find "$pkgdir" -name '*.ko' -exec gzip -9 {} \;
 }
